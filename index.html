@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Ranking Monitor - Google Play</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Mobile Top Ad -->
+    <div class="mobile-ad-top" id="mobileAdTop">
+        <div class="ad-placeholder">Anúncio Mobile Top</div>
+    </div>
+
+    <header>
+        <h1>📱 SEO Ranking Monitor</h1>
+        <p>Monitore o ranking do seu app na Google Play Store</p>
+    </header>
+
+    <div class="container">
+        <!-- Side Ads (Desktop) -->
+        <aside class="side-ad left-ad">
+            <div class="ad-placeholder">Anúncio Lateral Esquerdo</div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Form Section -->
+            <section class="form-section" id="formSection">
+                <div class="form-container">
+                    <h2>Informações do App</h2>
+                    
+                    <div class="form-group">
+                        <label for="packageName">Package Name do App *</label>
+                        <input 
+                            type="text" 
+                            id="packageName" 
+                            placeholder="Ex: com.exemplo.meuapp"
+                            required
+                        >
+                        <small>Digite o identificador único do seu app (package name)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Localização *</label>
+                        <select id="location" required>
+                            <option value="">Selecione um país</option>
+                            <optgroup label="América Latina">
+                                <option value="br">Brasil</option>
+                                <option value="ar">Argentina</option>
+                                <option value="cl">Chile</option>
+                                <option value="co">Colômbia</option>
+                                <option value="mx">México</option>
+                                <option value="pe">Peru</option>
+                                <option value="py">Paraguai</option>
+                                <option value="uy">Uruguai</option>
+                                <option value="ve">Venezuela</option>
+                            </optgroup>
+                            <optgroup label="América do Norte">
+                                <option value="us">Estados Unidos</option>
+                                <option value="ca">Canadá</option>
+                            </optgroup>
+                            <optgroup label="Europa">
+                                <option value="pt">Portugal</option>
+                                <option value="es">Espanha</option>
+                                <option value="gb">Reino Unido</option>
+                                <option value="de">Alemanha</option>
+                                <option value="fr">França</option>
+                                <option value="it">Itália</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="searchTerms">Termos de Busca *</label>
+                        <div class="search-terms-input">
+                            <input 
+                                type="text" 
+                                id="searchTermInput" 
+                                placeholder="Digite um termo e pressione Enter"
+                            >
+                            <button type="button" id="addTermBtn" class="btn-secondary">Adicionar</button>
+                        </div>
+                        <small>Adicione até 10 termos de busca (pressione Enter ou clique em Adicionar)</small>
+                        
+                        <div id="termsList" class="terms-list"></div>
+                        <div id="termsCounter" class="terms-counter">0/10 termos adicionados</div>
+                    </div>
+
+                    <button type="button" id="searchBtn" class="btn-primary" disabled>
+                        🔍 Realizar Buscas
+                    </button>
+
+                    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                        <div class="spinner"></div>
+                        <p id="loadingStatus">Processando...</p>
+                    </div>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <!-- Mobile Dropdown Toggle -->
+                <button class="mobile-form-toggle" id="mobileFormToggle">
+                    ⚙️ Alterar Parâmetros
+                </button>
+
+                <!-- App Info -->
+                <div class="app-info" id="appInfo">
+                    <div class="app-photo-container">
+                        <img id="appIcon" src="" alt="App Icon" class="app-icon">
+                    </div>
+                    <div class="app-details">
+                        <h2 id="appTitle">Carregando...</h2>
+                        <p id="appDescription">Carregando descrição...</p>
+                    </div>
+                </div>
+
+                <!-- Rankings Table -->
+                <div class="rankings-container">
+                    <h3>Resultados da Busca</h3>
+                    <div id="rankingsTable" class="rankings-table"></div>
+                </div>
+
+                <button id="newSearchBtn" class="btn-primary">
+                    🔄 Nova Busca
+                </button>
+            </section>
+        </main>
+
+        <!-- Side Ads (Desktop) -->
+        <aside class="side-ad right-ad">
+            <div class="ad-placeholder">Anúncio Lateral Direito</div>
+        </aside>
+    </div>
+
+    <!-- Footer Ad (Desktop) -->
+    <footer class="footer-ad">
+        <div class="ad-placeholder">Anúncio Footer</div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

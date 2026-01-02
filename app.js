@@ -6,7 +6,226 @@ const state = {
     location: '',
     searchTerms: [],
     appInfo: null,
-    rankings: []
+    rankings: [],
+    currentLanguage: 'pt'
+};
+
+// ========================================
+// TRANSLATIONS
+// ========================================
+const translations = {
+    pt: {
+        'app-title': '📱 SEO Ranking Monitor',
+        'app-subtitle': 'Monitore o ranking do seu app na Google Play Store',
+        'form-title': 'Informações do App',
+        'label-package': 'Package Name do App *',
+        'label-location': 'Localização *',
+        'label-search-terms': 'Termos de Busca *',
+        'select-country': 'Selecione um país',
+        'placeholder-package': 'Ex: com.exemplo.meuapp',
+        'placeholder-search': 'Digite um termo e pressione Enter',
+        'help-package': 'Digite o identificador único do seu app (package name)',
+        'help-search-terms': 'Adicione até 10 termos de busca (pressione Enter ou clique em Adicionar)',
+        'btn-add-term': 'Adicionar',
+        'btn-search': '🔍 Realizar Buscas',
+        'btn-new-search': '🔄 Realizar Nova Busca',
+        'terms-counter': 'termos adicionados',
+        'loading': 'Processando...',
+        'results-title': 'Resultados da Busca',
+        'table-term': 'Termo de Busca',
+        'table-rank': 'Posição no Ranking',
+        'rank-not-found': 'Não encontrado',
+        'rank-error': 'Erro na busca'
+    },
+    es: {
+        'app-title': '📱 Monitor de Ranking SEO',
+        'app-subtitle': 'Monitorea el ranking de tu app en Google Play Store',
+        'form-title': 'Información de la App',
+        'label-package': 'Nombre del Paquete *',
+        'label-location': 'Ubicación *',
+        'label-search-terms': 'Términos de Búsqueda *',
+        'select-country': 'Seleccione un país',
+        'placeholder-package': 'Ej: com.ejemplo.miapp',
+        'placeholder-search': 'Escriba un término y presione Enter',
+        'btn-add-term': 'Agregar',
+        'btn-search': '🔍 Realizar Búsquedas',
+        'btn-new-search': '🔄 Nueva Búsqueda',
+        'terms-counter': 'términos agregados',
+        'loading': 'Procesando...',
+        'results-title': 'Resultados de Búsqueda',
+        'table-term': 'Término de Búsqueda',
+        'table-rank': 'Posición en Ranking',
+        'rank-not-found': 'No encontrado',
+        'rank-error': 'Error en búsqueda'
+    },
+    en: {
+        'app-title': '📱 SEO Ranking Monitor',
+        'app-subtitle': 'Monitor your app ranking on Google Play Store',
+        'form-title': 'App Information',
+        'label-package': 'App Package Name *',
+        'label-location': 'Location *',
+        'label-search-terms': 'Search Terms *',
+        'select-country': 'Select a country',
+        'placeholder-package': 'Ex: com.example.myapp',
+        'placeholder-search': 'Type a term and press Enter',
+        'btn-add-term': 'Add',
+        'btn-search': '🔍 Search',
+        'btn-new-search': '🔄 New Search',
+        'terms-counter': 'terms added',
+        'loading': 'Processing...',
+        'results-title': 'Search Results',
+        'table-term': 'Search Term',
+        'table-rank': 'Ranking Position',
+        'rank-not-found': 'Not found',
+        'rank-error': 'Search error'
+    },
+    de: {
+        'app-title': '📱 SEO Ranking Monitor',
+        'app-subtitle': 'Überwachen Sie Ihr App-Ranking im Google Play Store',
+        'form-title': 'App-Informationen',
+        'label-package': 'App-Paketname *',
+        'label-location': 'Standort *',
+        'label-search-terms': 'Suchbegriffe *',
+        'select-country': 'Land auswählen',
+        'placeholder-package': 'Z.B: com.beispiel.meineapp',
+        'placeholder-search': 'Begriff eingeben und Enter drücken',
+        'btn-add-term': 'Hinzufügen',
+        'btn-search': '🔍 Suchen',
+        'btn-new-search': '🔄 Neue Suche',
+        'terms-counter': 'Begriffe hinzugefügt',
+        'loading': 'Verarbeitung...',
+        'results-title': 'Suchergebnisse',
+        'table-term': 'Suchbegriff',
+        'table-rank': 'Ranking-Position',
+        'rank-not-found': 'Nicht gefunden',
+        'rank-error': 'Suchfehler'
+    },
+    fr: {
+        'app-title': '📱 Moniteur de Classement SEO',
+        'app-subtitle': 'Surveillez le classement de votre application sur Google Play Store',
+        'form-title': 'Informations sur l\'application',
+        'label-package': 'Nom du package *',
+        'label-location': 'Emplacement *',
+        'label-search-terms': 'Termes de recherche *',
+        'select-country': 'Sélectionner un pays',
+        'placeholder-package': 'Ex: com.exemple.monapp',
+        'placeholder-search': 'Tapez un terme et appuyez sur Entrée',
+        'btn-add-term': 'Ajouter',
+        'btn-search': '🔍 Rechercher',
+        'btn-new-search': '🔄 Nouvelle recherche',
+        'terms-counter': 'termes ajoutés',
+        'loading': 'Traitement...',
+        'results-title': 'Résultats de recherche',
+        'table-term': 'Terme de recherche',
+        'table-rank': 'Position de classement',
+        'rank-not-found': 'Non trouvé',
+        'rank-error': 'Erreur de recherche'
+    },
+    ko: {
+        'app-title': '📱 SEO 순위 모니터',
+        'app-subtitle': 'Google Play 스토어에서 앱 순위를 모니터링하세요',
+        'form-title': '앱 정보',
+        'label-package': '앱 패키지 이름 *',
+        'label-location': '위치 *',
+        'label-search-terms': '검색어 *',
+        'select-country': '국가 선택',
+        'placeholder-package': '예: com.example.myapp',
+        'placeholder-search': '검색어를 입력하고 Enter를 누르세요',
+        'btn-add-term': '추가',
+        'btn-search': '🔍 검색',
+        'btn-new-search': '🔄 새 검색',
+        'terms-counter': '개 검색어 추가됨',
+        'loading': '처리 중...',
+        'results-title': '검색 결과',
+        'table-term': '검색어',
+        'table-rank': '순위',
+        'rank-not-found': '찾을 수 없음',
+        'rank-error': '검색 오류'
+    },
+    el: {
+        'app-title': '📱 Παρακολούθηση Κατάταξης SEO',
+        'app-subtitle': 'Παρακολουθήστε την κατάταξη της εφαρμογής σας στο Google Play Store',
+        'form-title': 'Πληροφορίες Εφαρμογής',
+        'label-package': 'Όνομα Πακέτου *',
+        'label-location': 'Τοποθεσία *',
+        'label-search-terms': 'Όροι Αναζήτησης *',
+        'select-country': 'Επιλέξτε χώρα',
+        'placeholder-package': 'Π.χ: com.example.myapp',
+        'placeholder-search': 'Πληκτρολογήστε όρο και πατήστε Enter',
+        'btn-add-term': 'Προσθήκη',
+        'btn-search': '🔍 Αναζήτηση',
+        'btn-new-search': '🔄 Νέα Αναζήτηση',
+        'terms-counter': 'όροι προστέθηκαν',
+        'loading': 'Επεξεργασία...',
+        'results-title': 'Αποτελέσματα Αναζήτησης',
+        'table-term': 'Όρος Αναζήτησης',
+        'table-rank': 'Θέση Κατάταξης',
+        'rank-not-found': 'Δεν βρέθηκε',
+        'rank-error': 'Σφάλμα αναζήτησης'
+    },
+    fi: {
+        'app-title': '📱 SEO-sijoitusten seuranta',
+        'app-subtitle': 'Seuraa sovelluksesi sijoitusta Google Play Storessa',
+        'form-title': 'Sovelluksen tiedot',
+        'label-package': 'Sovelluksen pakettitnimi *',
+        'label-location': 'Sijainti *',
+        'label-search-terms': 'Hakutermit *',
+        'select-country': 'Valitse maa',
+        'placeholder-package': 'Esim: com.esimerkki.sovellus',
+        'placeholder-search': 'Kirjoita termi ja paina Enter',
+        'btn-add-term': 'Lisää',
+        'btn-search': '🔍 Hae',
+        'btn-new-search': '🔄 Uusi haku',
+        'terms-counter': 'termiä lisätty',
+        'loading': 'Käsitellään...',
+        'results-title': 'Hakutulokset',
+        'table-term': 'Hakutermi',
+        'table-rank': 'Sijoitus',
+        'rank-not-found': 'Ei löytynyt',
+        'rank-error': 'Hakuvirhe'
+    },
+    pl: {
+        'app-title': '📱 Monitor Rankingu SEO',
+        'app-subtitle': 'Monitoruj ranking swojej aplikacji w Google Play Store',
+        'form-title': 'Informacje o aplikacji',
+        'label-package': 'Nazwa pakietu *',
+        'label-location': 'Lokalizacja *',
+        'label-search-terms': 'Terminy wyszukiwania *',
+        'select-country': 'Wybierz kraj',
+        'placeholder-package': 'Np: com.przyklad.mojaaplikacja',
+        'placeholder-search': 'Wpisz termin i naciśnij Enter',
+        'btn-add-term': 'Dodaj',
+        'btn-search': '🔍 Szukaj',
+        'btn-new-search': '🔄 Nowe wyszukiwanie',
+        'terms-counter': 'terminów dodanych',
+        'loading': 'Przetwarzanie...',
+        'results-title': 'Wyniki wyszukiwania',
+        'table-term': 'Termin wyszukiwania',
+        'table-rank': 'Pozycja w rankingu',
+        'rank-not-found': 'Nie znaleziono',
+        'rank-error': 'Błąd wyszukiwania'
+    },
+    it: {
+        'app-title': '📱 Monitor Ranking SEO',
+        'app-subtitle': 'Monitora il posizionamento della tua app su Google Play Store',
+        'form-title': 'Informazioni App',
+        'label-package': 'Nome pacchetto app *',
+        'label-location': 'Posizione *',
+        'label-search-terms': 'Termini di ricerca *',
+        'select-country': 'Seleziona un paese',
+        'placeholder-package': 'Es: com.esempio.miaapp',
+        'placeholder-search': 'Digita un termine e premi Invio',
+        'btn-add-term': 'Aggiungi',
+        'btn-search': '🔍 Cerca',
+        'btn-new-search': '🔄 Nuova ricerca',
+        'terms-counter': 'termini aggiunti',
+        'loading': 'Elaborazione...',
+        'results-title': 'Risultati della ricerca',
+        'table-term': 'Termine di ricerca',
+        'table-rank': 'Posizione in classifica',
+        'rank-not-found': 'Non trovato',
+        'rank-error': 'Errore di ricerca'
+    }
 };
 
 // ========================================
@@ -58,7 +277,9 @@ const elements = {
 // ========================================
 function init() {
     setupEventListeners();
+    setupLanguageSwitcher();
     loadFromLocalStorage();
+    updateLanguage(state.currentLanguage);
 }
 
 // ========================================
@@ -83,11 +304,52 @@ function setupEventListeners() {
     // Search button
     elements.searchBtn.addEventListener('click', performSearch);
     
-    // New search button
-    elements.newSearchBtn.addEventListener('click', resetToForm);
-    
     // Mobile form toggle
     elements.mobileFormToggle.addEventListener('click', toggleMobileForm);
+}
+
+// ========================================
+// LANGUAGE SWITCHER
+// ========================================
+function setupLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            updateLanguage(lang);
+        });
+    });
+}
+
+function updateLanguage(lang) {
+    state.currentLanguage = lang;
+    
+    // Update active button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                element.placeholder = translations[lang][key];
+            } else {
+                element.textContent = translations[lang][key];
+            }
+        }
+    });
+    
+    // Update terms counter
+    updateTermsCounter();
+    
+    // Save language preference
+    localStorage.setItem('seoRankingMonitor_lang', lang);
 }
 
 // ========================================
@@ -132,7 +394,12 @@ function renderTermsList() {
         </div>
     `).join('');
     
-    elements.termsCounter.textContent = `${state.searchTerms.length}/10 termos adicionados`;
+    updateTermsCounter();
+}
+
+function updateTermsCounter() {
+    const counterText = translations[state.currentLanguage]['terms-counter'] || 'terms added';
+    elements.termsCounter.textContent = `${state.searchTerms.length}/10 ${counterText}`;
 }
 
 // ========================================
@@ -357,8 +624,9 @@ function getRankClass(rank) {
 }
 
 function formatRank(rank) {
-    if (rank === 'NF') return 'Não encontrado';
-    if (rank === 'Erro') return 'Erro na busca';
+    const lang = state.currentLanguage;
+    if (rank === 'NF') return translations[lang]['rank-not-found'] || 'Not found';
+    if (rank === 'Erro') return translations[lang]['rank-error'] || 'Error';
     return `#${rank}`;
 }
 
@@ -426,6 +694,13 @@ function saveToLocalStorage() {
 }
 
 function loadFromLocalStorage() {
+    // Load language preference
+    const savedLang = localStorage.getItem('seoRankingMonitor_lang');
+    if (savedLang) {
+        state.currentLanguage = savedLang;
+    }
+    
+    // Load form data
     const data = localStorage.getItem('seoRankingMonitor');
     if (data) {
         try {

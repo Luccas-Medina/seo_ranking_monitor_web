@@ -14,11 +14,15 @@ const state = {
 // ========================================
 // Since we're fetching from Google Play Store directly, we'll face CORS issues.
 // For GitHub Pages, we need to use a CORS proxy service.
-// Popular options: https://corsproxy.io/, https://api.allorigins.win/
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// 
+// RECOMMENDED: corsproxy.io is faster than allorigins
+const CORS_PROXY = 'https://corsproxy.io/?';
 
-// Alternative proxies (uncomment to use):
-// const CORS_PROXY = 'https://corsproxy.io/?';
+// Alternative proxies (uncomment to use if corsproxy.io is slow):
+// const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// const CORS_PROXY = 'https://api.codetabs.com/v1/proxy?quest=';
+
+// BEST OPTION: Set up your own CORS proxy for production (see README.md)
 
 // ========================================
 // DOM ELEMENTS
@@ -189,7 +193,13 @@ async function fetchAppMetadata() {
     const proxyUrl = CORS_PROXY + encodeURIComponent(url);
     
     try {
-        const response = await fetch(proxyUrl);
+        const response = await fetch(proxyUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/html'
+            }
+        });
+        
         if (!response.ok) {
             throw new Error('Falha ao buscar informações do app');
         }
@@ -204,9 +214,10 @@ async function fetchAppMetadata() {
         const shortDescMatch = html.match(/<meta itemprop="description" content="([^"]+)"/i);
         const shortDescription = shortDescMatch ? shortDescMatch[1].trim() : 'Descrição não encontrada';
         
-        // Extract app icon
-        const iconMatch = html.match(/<img[^>]*itemprop="image"[^>]*src="([^"]+)"/i) || 
-                         html.match(/<img[^>]*class="[^"]*T75of[^"]*"[^>]*src="([^"]+)"/i);
+        // Extract app icon from div.class "Mqg6jb Mhrnjf"
+        const iconMatch = html.match(/<div[^>]*class="[^"]*Mqg6jb[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i) ||
+                         html.match(/<img[^>]*class="[^"]*T75of[^"]*nm4vBd[^"]*"[^>]*src="([^"]+)"/i) ||
+                         html.match(/<img[^>]*itemprop="image"[^>]*src="([^"]+)"/i);
         const iconUrl = iconMatch ? iconMatch[1].trim() : 'https://via.placeholder.com/120?text=App';
         
         state.appInfo = {
@@ -237,7 +248,13 @@ async function checkRankings() {
         const proxyUrl = CORS_PROXY + encodeURIComponent(url);
         
         try {
-            const response = await fetch(proxyUrl);
+            const response = await fetch(proxyUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'text/html'
+                }
+            });
+            
             const html = await response.text();
             
             // Extract all app links using the same regex as example.gs
@@ -263,8 +280,8 @@ async function checkRankings() {
                 rank
             });
             
-            // Small delay to avoid rate limiting
-            await sleep(500);
+            // Reduced delay to 300ms for faster results
+            await sleep(300);
             
         } catch (error) {
             console.error(`Error checking ranking for "${term}":`, error);
@@ -320,15 +337,9 @@ function displayResults() {
     
     elements.rankingsTable.innerHTML = tableHTML + mobileHTML;
     
-    // Switch to results view
+    // Switch to results view - hide form completely on both mobile and desktop
     elements.formSection.style.display = 'none';
     elements.resultsSection.style.display = 'block';
-    
-    // On desktop, show minimized form on the side
-    if (window.innerWidth >= 768) {
-        elements.formSection.classList.add('minimized');
-        elements.formSection.style.display = 'block';
-    }
 }
 
 // ========================================
@@ -381,7 +392,6 @@ function hideError() {
 
 function resetToForm() {
     elements.resultsSection.style.display = 'none';
-    elements.formSection.classList.remove('minimized', 'mobile-dropdown');
     elements.formSection.style.display = 'block';
     
     // Optionally clear the form
@@ -393,12 +403,13 @@ function resetToForm() {
 }
 
 function toggleMobileForm() {
-    elements.formSection.classList.toggle('mobile-dropdown');
-    
-    if (elements.formSection.classList.contains('mobile-dropdown')) {
+    // Toggle form visibility (same behavior for mobile and desktop now)
+    if (elements.formSection.style.display === 'none') {
+        elements.resultsSection.style.display = 'none';
         elements.formSection.style.display = 'block';
     } else {
         elements.formSection.style.display = 'none';
+        elements.resultsSection.style.display = 'block';
     }
 }
 

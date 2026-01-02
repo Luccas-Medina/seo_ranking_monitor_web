@@ -37,14 +37,14 @@ header p {
 }
 
 /* ========================================
-   MOBILE TOP AD
+   MOBILE BOTTOM AD
    ======================================== */
-.mobile-ad-top {
+.mobile-ad-bottom {
     display: none;
     background: #f5f5f5;
     padding: 1rem;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 /* ========================================
@@ -108,35 +108,6 @@ header p {
     padding: 2rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
-
-.form-section.minimized {
-    padding: 1rem;
-    max-width: 300px;
-}
-
-.form-section.minimized .form-container h2 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.form-section.minimized .form-group {
-    margin-bottom: 0.5rem;
-}
-
-.form-section.minimized label {
-    font-size: 0.875rem;
-}
-
-.form-section.minimized input,
-.form-section.minimized select {
-    padding: 0.5rem;
-    font-size: 0.875rem;
-}
-
-.form-section.minimized .btn-primary {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
 }
 
 .form-container h2 {
@@ -320,7 +291,21 @@ header p {
 }
 
 .mobile-form-toggle {
-    display: none;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.mobile-form-toggle:hover {
+    background: #5568d3;
 }
 
 /* App Info */
@@ -447,11 +432,6 @@ header p {
     color: #2e7d32;
 }
 
-/* New Search Button */
-#newSearchBtn {
-    margin-top: 2rem;
-}
-
 /* ========================================
    FOOTER AD
    ======================================== */
@@ -473,8 +453,8 @@ header p {
    MOBILE RESPONSIVE (< 768px)
    ======================================== */
 @media (max-width: 768px) {
-    /* Show mobile top ad */
-    .mobile-ad-top {
+    /* Show mobile bottom ad */
+    .mobile-ad-bottom {
         display: block;
     }
 
@@ -501,35 +481,6 @@ header p {
     /* Form Section */
     .form-section {
         padding: 1.5rem;
-    }
-
-    .form-section.minimized {
-        display: none;
-    }
-
-    .form-section.mobile-dropdown {
-        display: block;
-        max-width: 100%;
-        margin-bottom: 1rem;
-    }
-
-    /* Mobile Form Toggle */
-    .mobile-form-toggle {
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        background: #667eea;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-bottom: 1rem;
-    }
-
-    .mobile-form-toggle:hover {
-        background: #5568d3;
     }
 
     /* App Info - Mobile Layout */

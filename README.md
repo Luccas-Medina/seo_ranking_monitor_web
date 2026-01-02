@@ -60,20 +60,22 @@ Then follow steps 3-6 from Option 1.
 
 ## ⚠️ CORS Considerations
 
-Since this is a static site fetching data from Google Play Store, we use a CORS proxy. The app is configured with `api.allorigins.win` by default.
+Since this is a static site fetching data from Google Play Store, we use a CORS proxy. The app is configured with `corsproxy.io` by default for faster performance.
 
 ### Alternative CORS Proxies
 
 If you experience issues, you can change the proxy in [app.js](app.js):
 
 ```javascript
-// Current (line ~19)
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// Current (line ~19) - FASTEST
+const CORS_PROXY = 'https://corsproxy.io/?';
 
-// Alternatives:
-// const CORS_PROXY = 'https://corsproxy.io/?';
-// const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+// Alternatives (slower but more reliable):
+// const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// const CORS_PROXY = 'https://api.codetabs.com/v1/proxy?quest=';
 ```
+
+**Performance Note**: The speed of searches heavily depends on the CORS proxy used. `corsproxy.io` is typically the fastest, completing searches in 3-5 seconds for 10 terms.
 
 ### Self-Hosted CORS Proxy (Recommended for Production)
 
@@ -182,14 +184,14 @@ This implementation follows the logic from `example.gs` (Google Apps Script) whi
 ## 📱 Responsive Behavior
 
 - **Desktop (>768px)**: 
-  - Form moves to left sidebar after search
+  - Form hidden after search, accessible via "Realizar Nova Busca" button
   - Side ads visible
   - Footer ad visible
   - Results in table format
 
 - **Mobile (<768px)**:
-  - Form moves to collapsible dropdown
-  - Mobile top ad visible
+  - Form hidden after search, accessible via "Realizar Nova Busca" button
+  - Mobile bottom ad visible
   - Side and footer ads hidden
   - Results in two-column format
 
@@ -216,9 +218,11 @@ The app needs a CORS proxy to fetch from Google Play. Try:
 
 ### Slow performance
 
-- Normal behavior - each search term requires a separate API call
-- There's a 500ms delay between requests to avoid rate limiting
-- Checking 10 terms takes approximately 5-10 seconds
+- **Main cause**: CORS proxy speed varies significantly
+- **Solution**: Use `corsproxy.io` (default) for fastest results
+- Each search term requires a separate API call with 300ms delay between requests
+- Expected time: 3-5 seconds for 10 terms with corsproxy.io
+- For production: Set up your own CORS proxy for consistent performance (see above)
 
 ## 📄 License
 

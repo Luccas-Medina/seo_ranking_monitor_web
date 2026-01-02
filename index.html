@@ -7,11 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Mobile Top Ad -->
-    <div class="mobile-ad-top" id="mobileAdTop">
-        <div class="ad-placeholder">Anúncio Mobile Top</div>
-    </div>
-
     <header>
         <h1>📱 SEO Ranking Monitor</h1>
         <p>Monitore o ranking do seu app na Google Play Store</p>
@@ -102,9 +97,9 @@
 
             <!-- Results Section -->
             <section class="results-section" id="resultsSection" style="display: none;">
-                <!-- Mobile Dropdown Toggle -->
+                <!-- Form Toggle Button (Mobile and Desktop) -->
                 <button class="mobile-form-toggle" id="mobileFormToggle">
-                    ⚙️ Alterar Parâmetros
+                    🔄 Realizar Nova Busca
                 </button>
 
                 <!-- App Info -->
@@ -123,10 +118,6 @@
                     <h3>Resultados da Busca</h3>
                     <div id="rankingsTable" class="rankings-table"></div>
                 </div>
-
-                <button id="newSearchBtn" class="btn-primary">
-                    🔄 Nova Busca
-                </button>
             </section>
         </main>
 
@@ -134,6 +125,11 @@
         <aside class="side-ad right-ad">
             <div class="ad-placeholder">Anúncio Lateral Direito</div>
         </aside>
+    </div>
+
+    <!-- Mobile Bottom Ad -->
+    <div class="mobile-ad-bottom" id="mobileAdBottom">
+        <div class="ad-placeholder">Anúncio Mobile Bottom</div>
     </div>
 
     <!-- Footer Ad (Desktop) -->

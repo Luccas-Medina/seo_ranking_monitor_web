@@ -310,26 +310,22 @@ function setupEventListeners() {
 // LANGUAGE SWITCHER
 // ========================================
 function setupLanguageSwitcher() {
-    const langButtons = document.querySelectorAll('.lang-btn');
+    const langSelect = document.getElementById('languageSelect');
     
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
-            updateLanguage(lang);
-        });
+    langSelect.addEventListener('change', (e) => {
+        const lang = e.target.value;
+        updateLanguage(lang);
     });
 }
 
 function updateLanguage(lang) {
     state.currentLanguage = lang;
     
-    // Update active button
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        }
-    });
+    // Update select value
+    const langSelect = document.getElementById('languageSelect');
+    if (langSelect) {
+        langSelect.value = lang;
+    }
     
     // Update all translatable elements
     document.querySelectorAll('[data-i18n]').forEach(element => {

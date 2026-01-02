@@ -67,11 +67,18 @@ header p {
 /* Language Switcher */
 .language-switcher {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-.lang-btn {
+.lang-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #667eea;
+    white-space: nowrap;
+}
+
+.lang-select {
     background: #f5f5f5;
     border: 2px solid #e0e0e0;
     padding: 0.5rem 0.75rem;
@@ -80,19 +87,18 @@ header p {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
+    min-width: 150px;
 }
 
-.lang-btn:hover {
+.lang-select:hover {
     background: #e8e8e8;
     border-color: #667eea;
-    transform: translateY(-2px);
 }
 
-.lang-btn.active {
-    background: #667eea;
-    color: white;
+.lang-select:focus {
+    outline: none;
     border-color: #667eea;
+    background: white;
 }
 
 /* ========================================
@@ -600,12 +606,19 @@ header p {
 
     .language-switcher {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: space-between;
     }
 
-    .lang-btn {
+    .lang-label {
+        font-size: 0.75rem;
+    }
+
+    .lang-select {
+        flex: 1;
+        max-width: 180px;
         padding: 0.4rem 0.6rem;
         font-size: 0.75rem;
+        min-width: 130px;
     }
 
     /* Promo Banner */

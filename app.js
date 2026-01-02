@@ -233,12 +233,10 @@ const translations = {
 // ========================================
 // Since we're fetching from Google Play Store directly, we'll face CORS issues.
 // For GitHub Pages, we need to use a CORS proxy service.
-// 
-// RECOMMENDED: corsproxy.io is faster than allorigins
-const CORS_PROXY = 'https://corsproxy.io/?';
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
-// Alternative proxies (uncomment to use if corsproxy.io is slow):
-// const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// Alternative proxies (uncomment to use):
+// const CORS_PROXY = 'https://corsproxy.io/?';
 // const CORS_PROXY = 'https://api.codetabs.com/v1/proxy?quest=';
 
 // BEST OPTION: Set up your own CORS proxy for production (see README.md)

@@ -788,168 +788,141 @@ const appsData = [
     {
         name: 'Mensagens Bom Dia',
         packageId: 'com.mensagensbomdia.app',
-        color: '#1E9C2E'
+        color: '#1E9C2E',
+        icon: 'icons/mensagens_dia.png'
     },
     {
         name: 'Bíblia Sagrada',
         packageId: 'com.medinabibliasagrada.app',
-        color: '#62361E'
+        color: '#62361E',
+        icon: 'icons/biblia.png'
     },
     {
         name: 'Mensagens de Natal',
         packageId: 'com.mensagens_de_natal.app',
-        color: '#AF261C'
+        color: '#AF261C',
+        icon: 'icons/natal.png'
     },
     {
         name: 'Mensagens Aniversário',
         packageId: 'com.mensagens_aniversario.app',
-        color: '#536834'
+        color: '#536834',
+        icon: 'icons/aniversario.png'
     },
     {
         name: 'Livro de Receitas',
         packageId: 'com.livro_de_receitas.app',
-        color: '#C14442'
+        color: '#C14442',
+        icon: 'icons/receitas.png'
     },
     {
         name: 'Roleta da Sorte',
         packageId: 'com.roleta_da_sorte.app',
-        color: '#561490'
+        color: '#561490',
+        icon: 'icons/roleta.png'
     },
     {
         name: 'Frases de Tudo',
         packageId: 'com.mensagens_frases_de_tudo.app',
-        color: '#D55AC1'
+        color: '#D55AC1',
+        icon: 'icons/tudo.png'
     },
     {
         name: 'Gerador de Senhas',
         packageId: 'com.gerador_de_senhas.app',
-        color: '#36AB23'
+        color: '#36AB23',
+        icon: 'icons/senhas.png'
     },
     {
         name: 'Versos Bíblicos',
         packageId: 'com.versosbiblicos.app',
-        color: '#2196F3'
+        color: '#2196F3',
+        icon: 'icons/versiculos.png'
     },
     {
         name: 'Frases Motivacionais',
         packageId: 'com.frasesmotivacionais.app',
-        color: '#FF5722'
+        color: '#FF5722',
+        icon: 'icons/motivacionais.png'
     },
     {
         name: 'Trechos de Músicas',
         packageId: 'com.trechosmusicas.app',
-        color: '#FF2C26'
+        color: '#FF2C26',
+        icon: 'icons/musicas.png'
     },
     {
         name: 'Frases de Animes',
         packageId: 'com.frasesanimes.app',
-        color: '#000000'
+        color: '#000000',
+        icon: 'icons/animes.png'
     },
     {
         name: 'Horóscopo do Dia',
         packageId: 'com.horoscopo.dia.app',
-        color: '#510482'
+        color: '#510482',
+        icon: 'icons/horoscopo.png'
     },
     {
         name: 'Bom dia, Tarde e Noite',
         packageId: 'com.bomdia_boatarde_boanoite.app',
-        color: '#003A7C'
+        color: '#003A7C',
+        icon: 'icons/dia_tarde_noite.png'
     },
     {
         name: 'Mensagens Boa Tarde',
         packageId: 'com.mensagensboatarde.app',
-        color: '#43221F'
+        color: '#43221F',
+        icon: 'icons/tarde.png'
     },
     {
         name: 'Mensagens Boa Noite',
         packageId: 'com.mensagensboanoite.app',
-        color: '#120F46'
+        color: '#120F46',
+        icon: 'icons/noite.png'
     },
     {
         name: 'Frases de Games',
         packageId: 'com.frasesdegames.app',
-        color: '#607D8B'
+        color: '#607D8B',
+        icon: 'icons/games.png'
     },
     {
         name: 'Frases da Semana',
         packageId: 'com.frases_dias_da_semana.app',
-        color: '#FA6147'
+        color: '#FA6147',
+        icon: 'icons/semana.png'
     }
 ];
 
-async function loadAppsShowcase() {
+function loadAppsShowcase() {
     const appsGrid = document.getElementById('appsGrid');
     if (!appsGrid) return;
 
-    // Create app cards
+    // Create app cards with local icons
     appsData.forEach(app => {
         const card = document.createElement('a');
-        card.className = 'app-card app-card-loading';
+        card.className = 'app-card';
         card.href = `https://play.google.com/store/apps/details?id=${app.packageId}&hl=pt&gl=BR`;
         card.target = '_blank';
         card.rel = 'noopener noreferrer';
-        card.dataset.packageId = app.packageId;
         
-        // Placeholder icon
-        const iconPlaceholder = document.createElement('div');
-        iconPlaceholder.className = 'app-card-icon-placeholder';
+        // App icon
+        const img = document.createElement('img');
+        img.className = 'app-card-icon';
+        img.src = app.icon;
+        img.alt = `${app.name} icon`;
+        img.loading = 'lazy';
         
         // App name
         const name = document.createElement('h3');
         name.className = 'app-card-name';
         name.textContent = app.name;
         
-        card.appendChild(iconPlaceholder);
+        card.appendChild(img);
         card.appendChild(name);
         appsGrid.appendChild(card);
     });
-
-    // Load app icons asynchronously
-    for (const app of appsData) {
-        try {
-            const iconUrl = await fetchAppIcon(app.packageId);
-            const card = appsGrid.querySelector(`[data-package-id="${app.packageId}"]`);
-            if (card && iconUrl) {
-                const placeholder = card.querySelector('.app-card-icon-placeholder');
-                const img = document.createElement('img');
-                img.className = 'app-card-icon';
-                img.src = iconUrl;
-                img.alt = `${app.name} icon`;
-                img.loading = 'lazy';
-                placeholder.replaceWith(img);
-                card.classList.remove('app-card-loading');
-            }
-        } catch (error) {
-            console.error(`Error loading icon for ${app.name}:`, error);
-        }
-        // Add small delay to avoid rate limiting
-        await sleep(200);
-    }
-}
-
-async function fetchAppIcon(packageId) {
-    try {
-        const url = `https://play.google.com/store/apps/details?id=${packageId}&hl=pt&gl=BR`;
-        const response = await fetch(url);
-        const html = await response.text();
-        
-        // Try to extract icon URL from HTML
-        const iconMatch = html.match(/<img[^>]+alt="[^"]*"[^>]+src="([^"]+)"[^>]*class="[^"]*(?:icon|logo)[^"]*"/i) ||
-                         html.match(/<img[^>]+src="([^"]+)"[^>]*alt="[^"]*"[^>]*class="[^"]*(?:icon|logo)[^"]*"/i) ||
-                         html.match(/https:\/\/play-lh\.googleusercontent\.com\/[^"'\s]+/);
-        
-        if (iconMatch) {
-            let iconUrl = iconMatch[1] || iconMatch[0];
-            // Clean up the URL
-            iconUrl = iconUrl.split('=')[0] + '=w240-h240-rw';
-            return iconUrl;
-        }
-        
-        return null;
-    } catch (error) {
-        console.error(`Error fetching icon for ${packageId}:`, error);
-        return null;
-    }
 }
 
 // ========================================

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEO Ranking Monitor - Google Play</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2243080862412586"
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -47,11 +51,6 @@
     </div>
 
     <div class="container">
-        <!-- Side Ads (Desktop) -->
-        <aside class="side-ad left-ad">
-            <div class="ad-placeholder">Anúncio Lateral Esquerdo</div>
-        </aside>
-
         <!-- Main Content -->
         <main class="main-content">
             <!-- Form Section -->
@@ -215,22 +214,23 @@
                 </div>
             </section>
         </main>
-
-        <!-- Side Ads (Desktop) -->
-        <aside class="side-ad right-ad">
-            <div class="ad-placeholder">Anúncio Lateral Direito</div>
-        </aside>
     </div>
 
-    <!-- Mobile Bottom Ad -->
-    <div class="mobile-ad-bottom" id="mobileAdBottom">
-        <div class="ad-placeholder">Anúncio Mobile Bottom</div>
-    </div>
 
-    <!-- Footer Ad (Desktop) -->
-    <footer class="footer-ad">
-        <div class="ad-placeholder">Anúncio Footer</div>
-    </footer>
+
+    <!-- Apps Showcase Section -->
+    <section class="apps-showcase">
+        <div class="apps-showcase-container">
+            <h2 class="apps-showcase-title">Nossos Aplicativos</h2>
+            <p class="apps-showcase-subtitle">Conheça nossa coleção de apps na Google Play Store</p>
+            
+            <div class="apps-grid" id="appsGrid">
+                <!-- Apps will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+
 
     <script src="app.js"></script>
 </body>
